@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    name: "",
+    name: "", // здесь хранится фильтр по имени
 };
 
 const sliceFilter = createSlice({

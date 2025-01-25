@@ -35,11 +35,6 @@ const isLoading = useSelector(selectIsLoading);
 
   return (
     <div>
-    {/* <input 
-      type="text" 
-      placeholder="Search contacts" 
-      onChange={handleFilterChange} 
-    /> */}
     {isError && <h2>Something went wrong!</h2>}
     {isLoading && <h2>Loading...</h2>}
     

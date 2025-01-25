@@ -11,7 +11,7 @@ const SearchBox = () => {
 
   // 8
   // Отримуємо поточне значення фільтра з Redux-стану
-  const filter = useSelector((state) => state.filters.name);
+  const filters = useSelector((state) => state.filters.name);
   //
   const handleFilterChange = (e) => {
     // Оновлюємо фільтр у Redux-стані
@@ -21,7 +21,7 @@ const SearchBox = () => {
   return (
     <div className={s.search_box}>
       <p>Find contacts by name</p>
-      <input value={filter}   
+      <input value={filters}   
       placeholder="Search contacts" 
       onChange={handleFilterChange} />
     </div>

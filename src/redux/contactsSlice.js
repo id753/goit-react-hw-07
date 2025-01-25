@@ -7,8 +7,6 @@ const initialState = {
   // 1
   isLoading: false,
   isError: false,
-  // H 0
-  filter: "", // додано поле фільтра
 };
 
 // базовая структура
@@ -33,13 +31,7 @@ const sliceContacts = createSlice({
     setError: (state, action) => {
       state.isError = action.payload;
     },
-
-    // н1
-    setFilter: (state, action) => { // екшн для зміни фільтра
-      state.filter = action.payload;
-    },
   },
-// });
 
 // 4 n cont list 5
 extraReducers: (builder) => {
@@ -75,8 +67,8 @@ state.items.push(action.payload);
 // н2 Селектор для фільтрації контактів
 export const selectFilteredContacts = createSelector(
   // перший аргумент - входи селектора
-  (state) => state.contacts.items, // масив контактів
-  (state) => state.filters.name, // значення фільтра
+  (state) => state.contacts.items,
+  (state) => state.filters.name,
   (contacts, filter) => {
     // логіка фільтрації
     return contacts.filter((contact) =>
@@ -96,11 +88,10 @@ export const {
   setLoading,
   setError,
   // H3
-  setFilter 
+  // setFilter 
 } = sliceContacts.actions;
 
 // экспорт селекторов в Konтактлист
 export const selectIsLoading = (state) => state.isLoading;
 export const selectIsError = (state) => state.isError;
-// H4
-export const selectFilter = (state) => state.filter; // селектор для фільтра
+
