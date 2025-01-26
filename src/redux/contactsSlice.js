@@ -5,8 +5,8 @@ import { fetchContacts, addContact, deleteContact } from "./contactsOps";
 const initialState = {
   items: [],
   // 1
-  isLoading: false,
-  isError: false,
+  loading: false,
+  error: false,
 };
 
 // базовая структура
@@ -14,7 +14,7 @@ const sliceContacts = createSlice({
   name: "contacts",
   initialState,
   reducers: {
-    // 
+    //
     // addContact: (state, action) => {
     //   state.items.push(action.payload);
     // },
@@ -26,42 +26,41 @@ const sliceContacts = createSlice({
 
     // 1 экшены затем экспорт
     setLoading: (state, action) => {
-      state.isLoading = action.payload;
+      state.loading = action.payload;
     },
     setError: (state, action) => {
-      state.isError = action.payload;
+      state.error = action.payload;
     },
   },
 
-// 4 n cont list 5
-extraReducers: (builder) => {
-  builder
-  .addCase(fetchContacts.fulfilled, (state, action) => {
-    state.items = action.payload;
-    state.isLoading = false;
-  })
-  .addCase(fetchContacts.rejected, (state, action) => {
-    state.isError = action.payload;
-    state.isLoading = false;
-  })
-  .addCase(fetchContacts.pending, (state, action) => {
-    state.isLoading = true;
-    state.isError = false;
-  })
+  // 4 n cont list 5
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchContacts.fulfilled, (state, action) => {
+        state.items = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchContacts.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchContacts.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+      })
 
-  // 8
-.addCase(addContact.fulfilled, (state, action) => {
-state.items.push(action.payload);
-  })
+      // 8
+      .addCase(addContact.fulfilled, (state, action) => {
+        state.items.push(action.payload);
+      })
 
-  // 10
-  .addCase(deleteContact.fulfilled, (state, action) => {
-    state.items = state.items.filter(
-      (item) => item.id !== action.payload.id
-    );
-  })
-
-},
+      // 10
+      .addCase(deleteContact.fulfilled, (state, action) => {
+        state.items = state.items.filter(
+          (item) => item.id !== action.payload.id
+        );
+      });
+  },
 });
 
 // н2 Селектор для фільтрації контактів
@@ -81,17 +80,16 @@ export const selectFilteredContacts = createSelector(
 export const contactsReducer = sliceContacts.reducer;
 
 //
-export const { 
-  // addContact, 
-  // deleteContact, 
+export const {
+  // addContact,
+  // deleteContact,
   // 1
   setLoading,
   setError,
   // H3
-  // setFilter 
+  // setFilter
 } = sliceContacts.actions;
 
 // экспорт селекторов в Konтактлист
-export const selectIsLoading = (state) => state.isLoading;
-export const selectIsError = (state) => state.isError;
-
+export const selectIsLoading = (state) => state.contacts.loading;
+export const selectIsError = (state) => state.contacts.error;

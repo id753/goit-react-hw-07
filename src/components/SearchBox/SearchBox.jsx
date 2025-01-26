@@ -1,7 +1,7 @@
 import s from "./SearchBox.module.css";
 
 // 6 из слайс.джс имена редьюсеров
-import { changeFilter } from "../../redux/filtersSlice";
+import { changeFilter, selectNameFilter } from "../../redux/filtersSlice";
 // 7
 import { useDispatch, useSelector } from "react-redux";
 
@@ -10,8 +10,10 @@ const SearchBox = () => {
   const dispatch = useDispatch();
 
   // 8
-  // Отримуємо поточне значення фільтра з Redux-стану
-  const filters = useSelector((state) => state.filters.name);
+  // ** Отримуємо поточне значення фільтра з Redux-стану
+  // const filters = useSelector((state) => state.filters.name);
+  const filters = useSelector(selectNameFilter);
+  
   //
   const handleFilterChange = (e) => {
     // Оновлюємо фільтр у Redux-стані
